@@ -1,0 +1,126 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="dialog-polyfill.css" />
+    <script src="dialog-polyfill.js"></script>
+
+    <script>
+      let dialog; // accessed in index.html
+
+      window.onload = () => {
+        dialog = document.querySelector('dialog');
+        dialogPolyfill.registerDialog(dialog);
+      };
+
+      function closeDialog() {
+        console.log('closeDialog: dialog =', dialog);
+        dialog.close();
+      }
+
+      function openDialog() {
+        console.log('openDialog: dialog =', dialog);
+        dialog.showModal();
+      }
+    </script>
+    <style>
+      body {
+        font-family: sans-serif;
+      }
+
+      .body {
+        padding: 10px;
+      }
+
+      button {
+        margin: 0 5px;
+      }
+
+      .buttons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 10px;
+      }
+
+      .close-btn {
+        background-color: transparent;
+        border: none;
+        color: white;
+        font-size: 24px;
+        margin-right: 10px;
+        outline: none;
+        padding: 0;
+      }
+
+      .close-btn:hover {
+        background-color: transparent;
+        color: darkgray !important;
+      }
+
+      dialog {
+        /* These properties center the dialog in the browser window. */
+        display: table;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        right: 50%;
+        transform: translate(-50%, -50%);
+
+        border: none;
+        box-shadow: 0 0 10px darkgray;
+        padding: 0;
+      }
+
+      /*
+      .error-dialog .title {
+        color: red;
+      }
+      */
+
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        background-color: cornflowerblue;
+        box-sizing: border-box;
+        font-weight: bold;
+        width: 100%;
+      }
+
+      section {
+        margin: 0;
+      }
+
+      .title {
+        display: flex;
+        align-items: center;
+        color: white;
+        font-size: 14px;
+        margin-right: 20px;
+        padding: 10px;
+      }
+
+      ::backdrop,
+      dialog + .backdrop {
+        /* a transparent shade of gray */
+        background-color: rgba(0, 0, 0, 0.2);
+      }
+    </style>
+  </head>
+  <body>
+    <button onClick="openDialog()">Open Dialog</button>
+    <dialog>
+      <header>
+        <div class="title">
+          This is the title.
+        </div>
+        <button class="close-btn" onClick="closeDialog()">
+          &#x2716;
+        </button>
+      </header>
+      <section class="body">
+        This is the content.
+      </section>
+    </dialog>
+  </body>
+</html>
