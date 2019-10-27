@@ -48,12 +48,9 @@
 
 	dialog {
     /* These properties center the dialog in the browser window. */
-    display: table;
-    position: absolute;
+    position: fixed;
     top: 50%;
-    left: 50%;
-    right: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(0, -50%);
 
     border: none;
     box-shadow: 0 0 10px darkgray;
@@ -83,7 +80,7 @@
     margin-right: 10px;
   }
 
-  ::backdrop,
+  dialog::backdrop,
   dialog + .backdrop {
     /* a transparent shade of gray */
     background-color: rgba(0, 0, 0, 0.4);
