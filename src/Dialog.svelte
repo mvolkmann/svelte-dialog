@@ -1,5 +1,6 @@
 <!-- See README.md for documentation on using this. -->
 <script>
+  import dialogPolyfill from 'dialog-polyfill'
 	import {createEventDispatcher, onMount} from 'svelte';
 	
   // Boolean that determines whether a close "X" should be displayed.
