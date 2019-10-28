@@ -62,7 +62,7 @@
     justify-content: space-between;
     align-items: center;
 		
-    background-color: red; /*cornflowerblue;*/
+    background-color: cornflowerblue;
     box-sizing: border-box;
     color: white;
     font-weight: bold;
