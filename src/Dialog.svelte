@@ -1,8 +1,8 @@
 <!-- See README.md for documentation on using this. -->
 <script>
   import dialogPolyfill from 'dialog-polyfill'
-	import {createEventDispatcher, onMount} from 'svelte';
-	
+  import {createEventDispatcher, onMount} from 'svelte';
+
   // Boolean that determines whether a close "X" should be displayed.
   export let canClose = true;
 
@@ -11,28 +11,28 @@
 
   // Parent components can use bind:dialog={myDialog} to get a
   // reference so they can call show(), showModal(), and close().
-	export let dialog = undefined;
+  export let dialog = undefined;
 
   // An optional icon to render in the header before the title.
-	export let icon = undefined;
+  export let icon = undefined;
 
   // Title text to display in the dialog header.
-	export let title;
-	
-	const dispatch = createEventDispatcher();
-	
-	$: classNames = 'dialog' + (className ? ' ' + className : '');
-	
-	onMount(() => dialogPolyfill.registerDialog(dialog));
-	
-	function close() {
+  export let title;
+
+  const dispatch = createEventDispatcher();
+
+  $: classNames = 'dialog' + (className ? ' ' + className : '');
+
+  onMount(() => dialogPolyfill.registerDialog(dialog));
+
+  function close() {
     dispatch('close');
     dialog.close();
   }
 </script>
 
 <style>
-	.body {
+  .body {
     padding: 10px;
   }
 
@@ -46,7 +46,7 @@
     padding: 0;
   }
 
-	dialog {
+  dialog {
     /* These properties center the dialog in the browser window. */
     position: fixed;
     top: 50%;
@@ -55,13 +55,13 @@
     border: none;
     box-shadow: 0 0 10px darkgray;
     padding: 0;
-	}
-	
+  }
+
   header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-		
+
     background-color: cornflowerblue;
     box-sizing: border-box;
     color: white;
@@ -87,7 +87,7 @@
   }
 </style>
 
-<dialog bind:this={dialog} class={classNames} open={false}>
+<dialog bind:this={dialog} class={classNames}>
   <header>
     {#if icon}{icon}{/if}
     <div class="title">{title}</div>
@@ -98,6 +98,6 @@
     {/if}
   </header>
   <main>
-		<slot />
-	</main>
+    <slot />
+  </main>
 </dialog>
