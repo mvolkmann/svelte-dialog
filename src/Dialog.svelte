@@ -11,7 +11,7 @@
 
   // Parent components can use bind:dialog={myDialog} to get a
   // reference so they can call show(), showModal(), and close().
-  export let dialog = undefined;
+  export let dialog;
 
   // An optional icon to render in the header before the title.
   export let icon = undefined;

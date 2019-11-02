@@ -1,7 +1,7 @@
 <script>
-	import Dialog from './Dialog.svelte';
-	let myDialog;
-	const openDialog = () => myDialog.showModal();
+  import Dialog from './Dialog.svelte';
+  let myDialog = null;
+  const openDialog = () => myDialog.showModal();
 </script>
 
 <button on:click={openDialog}>Open Dialog</button>
