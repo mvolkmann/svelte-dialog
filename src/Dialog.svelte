@@ -32,16 +32,19 @@
     // Parent components can optionally listen for this event.
     dispatch('close');
 
-    // Wait to call dialog.close() until the transition is complete.
-    // Otherwise the dialog will close before the transition begins.
-    setTimeout(() => dialog.close(), duration);
+    // This is not needed if the parent stops rendering this component.
+    //dialog.close();
   }
 </script>
 
 <dialog
   bind:this={dialog}
   class={classNames}
-  in:fade={{duration}}
+  transition:fade={{duration}}
+  on:introstart={() => console.log('intro start')}
+  on:introend={() => console.log('intro end')}
+  on:outrostart={() => console.log('outro start')}
+  on:outroend={() => console.log('outro end')}
 >
   <!-- TODO: It seems fade is the only transition that works here. -->
   <header>
