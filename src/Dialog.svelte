@@ -2,6 +2,7 @@
 <script>
   import dialogPolyfill from 'dialog-polyfill'
   import {createEventDispatcher, onMount} from 'svelte';
+  import {fade} from 'svelte/transition';
 
   // Boolean that determines whether a close "X" should be displayed.
   export let canClose = true;
@@ -19,6 +20,8 @@
   // Title text to display in the dialog header.
   export let title;
 
+  const duration = 700;
+
   const dispatch = createEventDispatcher();
 
   $: classNames = 'dialog' + (className ? ' ' + className : '');
@@ -28,11 +31,19 @@
   function close() {
     // Parent components can optionally listen for this event.
     dispatch('close');
-    dialog.close();
+
+    // Wait to call dialog.close() until the transition is complete.
+    // Otherwise the dialog will close before the transition begins.
+    setTimeout(() => dialog.close(), duration);
   }
 </script>
 
-<dialog bind:this={dialog} class={classNames}>
+<dialog
+  bind:this={dialog}
+  class={classNames}
+  in:fade={{duration}}
+>
+  <!-- TODO: It seems fade is the only transition that works here. -->
   <header>
     {#if icon}{icon}{/if}
     <div class="title">{title}</div>
