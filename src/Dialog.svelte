@@ -2,7 +2,6 @@
 <script>
   import dialogPolyfill from 'dialog-polyfill'
   import {createEventDispatcher, onMount} from 'svelte';
-  import {fade} from 'svelte/transition';
 
   // Boolean that determines whether a close "X" should be displayed.
   export let canClose = true;
@@ -20,8 +19,6 @@
   // Title text to display in the dialog header.
   export let title;
 
-  const duration = 700;
-
   const dispatch = createEventDispatcher();
 
   $: classNames = 'dialog' + (className ? ' ' + className : '');
@@ -33,20 +30,11 @@
     dispatch('close');
 
     // This is not needed if the parent stops rendering this component.
-    //dialog.close();
+    dialog.close();
   }
 </script>
 
-<dialog
-  bind:this={dialog}
-  class={classNames}
-  transition:fade={{duration}}
-  on:introstart={() => console.log('intro start')}
-  on:introend={() => console.log('intro end')}
-  on:outrostart={() => console.log('outro start')}
-  on:outroend={() => console.log('outro end')}
->
-  <!-- TODO: It seems fade is the only transition that works here. -->
+<dialog bind:this={dialog} class={classNames}>
   <header>
     {#if icon}{icon}{/if}
     <div class="title">{title}</div>
@@ -110,8 +98,9 @@
   }
 
   dialog::backdrop,
-  dialog + .backdrop {
-    /* a transparent shade of gray */
-    background-color: rgba(0, 0, 0, 0.4);
+  :global(dialog + .backdrop) {
+    /* This is a transparent shade of gray. */
+    /* Why is this ignored in Safari? */
+    background: rgba(0, 0, 0, 0.4);
   }
 </style>
