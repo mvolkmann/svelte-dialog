@@ -27,17 +27,17 @@ Add the following line in the head section of `public/index.html`.
 ```
 
 Parent components obtain a reference to the dialog element
-by including the prop `bind:dialog={myDialog}`
-where `myDialog` is a variable in the parent component
+by including the prop `bind:dialog`
+where `dialog` is a variable in the parent component
 that is initialized to `null`.
 
-To open the dialog as a modal, call `myDialog.showModal()`.
+To open the dialog as a modal, call `dialog.showModal()`.
 This prevents interaction with elements outside the dialog.
 
-To open the dialog as a non-modal, call `myDialog.show()`.
+To open the dialog as a non-modal, call `dialog.show()`.
 This allows interaction with elements outside the dialog.
 
-To close the dialog programmatically, call `myDialog.close()`.
+To close the dialog programmatically, call `dialog.close()`.
 Parent components can listen for the dialog being closed
 by the user by including the prop `on:close={handleClose}`
 where `handleClose` is a function in the parent component.
